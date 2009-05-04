@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>moomazon</h1>
+<p>Create business cards for a book, using details from Amazon.com.</p>
+<form action="/">
+<p><label for="q">Search for your book:</label> 
+    <input type="text" id="q" name="q">
+    <input type="submit" value="Search">
+</p>
+</form>
+{% endblock %}

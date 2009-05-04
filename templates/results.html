@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Search for {{ q|escape }}{% endblock %}
+
+{% block content %}
+
+<h1>You searched for "{{ q|escape }}"</h1>
+
+{% for book in results %}
+<img src="{{ book.images.thumbnail.url }}" width="{{ book.images.thumbnail.width }}" height="{{ book.images.thumbnail.height }}" alt="{{ book.title }}" style="float: left">
+
+<div id="text-preview">
+{% for line in book.lines %}
+{% if line.bold %}<strong>{% endif %}{{ line.string|escape }}{% if line.bold %}</strong>{% endif %}<br>
+{% endfor %}
+</div>
+
+<form style="clear: both; margin-top: 1em" action="http://www.moo.com/api/api.php" method="POST">
+<p><input type="hidden" name="xml" value="{{ book.xml|escape }}">
+    <input type="submit" value="Buy or preview cards">
+    <label for="preview">preview:</label> <input type="checkbox" name="dev" id="preview" value="1">
+</p>
+</form>
+{% endfor %}
+{% endblock %}

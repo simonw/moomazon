@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+{% spaceless %}<moo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.moo.com/xsd/api_0.7.xsd">
+	<request>
+		<version>0.7</version>
+		<api_key>{{ api_key }}</api_key>
+		<call>build</call>
+	</request>
+	<payload>
+		<products>
+			<product>
+				<product_type>minicard</product_type>
+				<designs>
+					<design>
+						<image>
+							<url>{{ book.images.large.url }}</url>
+							<type>variable</type>
+							<crop>
+								<auto>true</auto>
+							</crop>
+						</image>
+						<text_collection>
+							<minicard>
+							{% for line in lines %}
+								<text_line>
+									<id>{{ forloop.counter }}</id>
+									{% for pair in line %}
+									<{{ pair.0 }}>{{ pair.1|escape }}</{{ pair.0 }}>
+									{% endfor %}
+								</text_line>
+							{% endfor %}
+							</minicard>
+						</text_collection>
+					</design>
+				</designs>
+			</product>
+		</products>
+	</payload>
+</moo>
+{% endspaceless %}
